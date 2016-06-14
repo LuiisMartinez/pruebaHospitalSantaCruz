@@ -1,0 +1,12 @@
+#inicioSesion{
+    width: 200px;
+    text-align: center;
+}
+
+.form-control{
+    width: 250px;
+}
+
+.btn btn-default btn-default active{
+    width: 400px
+}

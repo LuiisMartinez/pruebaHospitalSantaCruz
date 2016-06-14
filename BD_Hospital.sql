@@ -121,18 +121,29 @@ FOREIGN KEY(medicamentos_idHospitalizacion) REFERENCES hospitalizacion(hospitali
 
 INSERT INTO medicamentos VALUES(NULL, 'Paracetamol','uno cada 8 horas','2','1');
 
-CREATE TABLE grupoEnfermeras(
-grupoEnfermeras_id INT AUTO_INCREMENT,
-grupoEnfermeras_idUsuario INT,
-grupoEnfermeras_idHospitalizacion INT,
-PRIMARY KEY(grupoEnfermeras_id),
-FOREIGN KEY(grupoEnfermeras_idUsuario) REFERENCES usuario(usuario_id),
-FOREIGN KEY(grupoEnfermeras_idHospitalizacion) REFERENCES hospitalizacion(hospitalizacion_id)
+CREATE TABLE HospitalizacionUsuarios(
+HospitalizacionUsuarios_id INT AUTO_INCREMENT,
+HospitalizacionUsuarios_idUsuario INT,
+HospitalizacionUsuarios_idHospitalizacion INT,
+PRIMARY KEY(HospitalizacionUsuarios_id),
+FOREIGN KEY(HospitalizacionUsuarios_idUsuario) REFERENCES usuario(usuario_id),
+FOREIGN KEY(HospitalizacionUsuarios_idHospitalizacion) REFERENCES hospitalizacion(hospitalizacion_id)
 );
 
-INSERT INTO grupoEnfermeras VALUES(NULL,'2','1');
+INSERT INTO HospitalizacionUsuarios VALUES(NULL,'2','1');
 
 
 SELECT * FROM tipoUsuario;
 SELECT * FROM tipoTurno;
 SELECT * FROM usuario;
+
+INSERT INTO usuario VALUES(NULL,'1','1','1','1995-11-14','1',AES_ENCRYPT('1',666),1,1);
+INSERT INTO usuario VALUES(NULL,
+'22-2', 
+'Doctor',
+'Doctor',
+'1995-11-14',
+'luis_martinez08@hotmail.es',
+AES_ENCRYPT('doc123',666),
+3,
+2);
