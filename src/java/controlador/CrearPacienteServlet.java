@@ -3,6 +3,8 @@ package controlador;
 import bd.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -10,47 +12,43 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelo.Usuario;
+import modelo.Paciente;
+import modelo.StaticPa;
 
-@WebServlet(name = "IniciarSesionServlet", urlPatterns = {"/iniciarSesion.do"})
-public class IniciarSesionServlet extends HttpServlet {
+@WebServlet(name = "CrearPacienteServlet", urlPatterns = {"/crearPaciente.do"})
+public class CrearPacienteServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
-            String rut = request.getParameter("txtRut");
-            String pass = request.getParameter("txtPass");
+            String nombre, rut, apellido, tipoPersonal, tipoTurno, direccion;
+            
+            rut = request.getParameter("txtRut");
+            nombre = request.getParameter("txtNombre");
+            apellido = request.getParameter("txtApellido");
+            Date fechaNa = Date.valueOf(request.getParameter("txtFechaNaci"));
+            direccion = request.getParameter("txtDireccion");
             
             try {
-            DAO d = new DAO();
-            Usuario usu = d.getUsuarioRutClave(rut, pass);
-            if (usu != null) {
-                if(usu.getIdTipoUsuario() == 1){//administrador
-                    request.getSession().setAttribute("usuario", usu);
-                    response.sendRedirect("menuAdministrador.jsp");
-                    
-                }else if(usu.getIdTipoUsuario() == 2){//Secretario
-                    request.getSession().setAttribute("usuario", usu);
-                    response.sendRedirect("menuSecretaria.jsp");
-                    
-                }else if(usu.getIdTipoUsuario() == 3){//Doctor
-                    request.getSession().setAttribute("usuario", usu);
-                    
-                    
-                }else if(usu.getIdTipoUsuario() == 4){//Enfermera
-                    request.getSession().setAttribute("usuario", usu);
-                    
-                    
-                }
-            } else {
-                response.sendRedirect("index.jsp?m=1");
+                DAO d = new DAO();
+                
+                Paciente p = new Paciente(1, rut, nombre, apellido, fechaNa, direccion);
+                
+                d.crearPaciente(p);
+                StaticPa.rutpaciente = rut;
+                
+                response.sendRedirect("regHospitalizacion.jsp?m="+rut+"");
+                
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(CrearPacienteServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-        } catch (Exception ex) {
-            Logger.getLogger(IniciarSesionServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            
+            
+            
+            
             
         }
     }

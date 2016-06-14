@@ -136,6 +136,7 @@ INSERT INTO HospitalizacionUsuarios VALUES(NULL,'2','1');
 SELECT * FROM tipoUsuario;
 SELECT * FROM tipoTurno;
 SELECT * FROM usuario;
+SELECT * FROM paciente;
 
 INSERT INTO usuario VALUES(NULL,'1','1','1','1995-11-14','1',AES_ENCRYPT('1',666),1,1);
 INSERT INTO usuario VALUES(NULL,
