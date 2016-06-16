@@ -18,7 +18,7 @@
             <div class="row" >
                 <h2>Secretaria: <%out.println(us.nombre+" "+us.apellidos);%></h2> 
                 <div class="col-md-6" >
-                    <form action="crearPaciente.do" method="post">
+                    <form action="" method="post">
                         <h4>Crear paciente</h4><br/>
                         <input class="form-control" name="txtRut" placeholder="Rut: " type="text" required="required"/><br/>
                         <input class="form-control" name="txtNombre" placeholder="Nombre: " type="text" required="required"/><br/>
@@ -27,7 +27,7 @@
                         <input class="form-control" name="txtFechaNaci" type="date" required="required"/><br/>
                         <input class="form-control" name="txtDireccion" placeholder="Direccion: " type="text" required="required"/><br/>
                         
-                        <input class="btn btn-primary" name="btnCrearPaciente" type="submit" value="Crear Paciente"><br/><br/>
+                        <input class="btn btn-primary" name="btnCrearPaciente" type="submit" value="Registrar Hospitalizacion"><br/><br/>
                         <a class="btn btn-danger" role="button" href="menuSecretaria.jsp">Limpiar</a>
                     </form>
                 </div>

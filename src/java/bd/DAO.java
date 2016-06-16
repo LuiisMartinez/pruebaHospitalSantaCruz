@@ -8,6 +8,7 @@ import modelo.Hospitalizacion;
 import modelo.HospitalizacionUsuario;
 import modelo.Medicamentos;
 import modelo.Paciente;
+import modelo.Respaldo;
 import modelo.TipoTurno;
 import modelo.TipoUsuario;
 import modelo.Usuario;
@@ -17,6 +18,7 @@ public class DAO {
     private String sql;
     public List<TipoUsuario> listaTipoUsuario;
     public List<TipoTurno> listaTipoTurno;
+    public List<Respaldo> respaldos;
     
     
     public DAO() throws SQLException {
@@ -596,5 +598,44 @@ public class DAO {
     /*
      Fin Métodos HospitalizacionUsuarios
      */
+    
+    
+    public void crearRespaldo(Respaldo r) throws SQLException {
+        sql = "INSERT INTO respaldo VALUES(NULL, '" + r.getFecha() + "', '" + r.getHora() + "', 0)";
+        C.ejecutar(sql);
+    }
+
+    public List<Respaldo> getRespaldos() throws SQLException {
+        respaldos = new ArrayList<>();
+        sql = "SELECT * FROM respaldo";
+        C.resultado = C.ejecutarSelect(sql);
+
+        while (C.resultado.next()) {
+            Respaldo r = new Respaldo(C.resultado.getInt(1), C.resultado.getString(2), C.resultado.getString(3));
+            respaldos.add(r);
+        }
+        C.sentencia.close();
+        return respaldos;
+    }
+
+    public Respaldo getRespaldo(String id) throws SQLException {
+        Respaldo r = null;
+        sql = "SELECT * FROM respaldo WHERE respaldo_id = '" + id + "'";
+        C.resultado = C.ejecutarSelect(sql);
+
+        if (C.resultado.next()) {
+            r = new Respaldo(C.resultado.getInt(1), C.resultado.getString(2), C.resultado.getString(3));
+        }
+        C.sentencia.close();
+        return r;
+    }
+
+    public void insertRespaldos(List<Respaldo> res) throws SQLException {
+        C.ejecutar("TRUNCATE TABLE respaldo");
+        for (Respaldo r : res ) {
+            C.ejecutar("INSERT INTO respaldo VALUES (NULL, '"+r.getFecha()+"', '"+r.getHora()+"', '"+r.getTipo()+"')");
+        }
+    }
+    
     
 }

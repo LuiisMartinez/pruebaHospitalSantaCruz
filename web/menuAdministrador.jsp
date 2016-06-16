@@ -16,8 +16,9 @@
     <body>
         <div class="container" >
             <div class="row" >
-                <h2>Administrador: <%out.println(us.nombre+" "+us.apellidos);%></h2> 
+                <div class="col-md-1"></div>
                 <div class="col-md-6" >
+                    <h2>Administrador: <%out.println(us.nombre + " " + us.apellidos);%></h2>
                     <form action="crearPersonal.do" method="post">
                         <h4>Crear Personal</h4><br/>
                         <input class="form-control" name="txtRut" placeholder="Rut: " type="text" required="required"/><br/>
@@ -45,7 +46,21 @@
                         <%
                             String m = request.getParameter("m");
                             if (m != null) {
-                                out.println("<div class='alert alert-success' role='alert'>La clave del usuario creado es : "+m+"</div>");
+                                out.println("<div class='alert alert-success' role='alert'>La clave del usuario creado es : " + m + "</div>");
+                            }
+                        %>
+                    </div>
+                </div>
+                <div class="col-md-3"><br/><br/><br/><br/>
+                    <a class="btn btn-danger" role="button" href="confirmarContra.jsp">Cambiar contraseña</a><br/><br/>
+                    <a class="btn btn-danger" role="button" href="editarUsuarios.jsp">Editar Usuarios</a><br/><br/>
+                    <a class="btn btn-danger" role="button" href="regRespaldo.jsp">Respaldos</a><br/><br/>
+                    <a class="btn btn-danger" role="button" href="cerrarSesion.do">Cerrar sesión</a><br/>
+                    <div style="margin-top: 60px; ">
+                        <%
+                            String rr = request.getParameter("rr");
+                            if (rr != null) {
+                                out.println("<div class='alert alert-success' role='alert'>La clave se a cambiado correctamente</div>");
                             }
                         %>
                     </div>

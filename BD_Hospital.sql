@@ -132,6 +132,13 @@ FOREIGN KEY(HospitalizacionUsuarios_idHospitalizacion) REFERENCES hospitalizacio
 
 INSERT INTO HospitalizacionUsuarios VALUES(NULL,'2','1');
 
+CREATE TABLE respaldo(
+respaldo_id INT AUTO_INCREMENT,
+respaldo_fecha VARCHAR(200),
+respaldo_hora VARCHAR(200),
+respaldo_tipo VARCHAR(200),
+PRIMARY KEY(respaldo_id)
+);
 
 SELECT * FROM tipoUsuario;
 SELECT * FROM tipoTurno;

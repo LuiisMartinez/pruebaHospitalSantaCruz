@@ -30,7 +30,7 @@
             <div class="row" >
                 <h2>Secretaria: <%out.println(us.nombre+" "+us.apellidos);%></h2> 
                 <div class="col-md-6" >
-                    <form action="" method="post">
+                    <form action="crearHospitalizacion.do" method="post">
                         <h4>Crear Personal</h4><br/>
                         <input class="form-control" name="txtRut" type="text" value="<%out.println(rutFin);%>" readonly/><br/>
                         Motivo: <textarea class="form-control" name="txtMotivo"></textarea><br/>
@@ -47,8 +47,7 @@
                                     }
                                 %>
                             </select><br/>
-                        <input class="btn btn-primary" name="btnCrearPaciente" type="submit" value="Crear Paciente"><br/><br/>
-                        <a class="btn btn-danger" role="button" href="menuSecretaria.jsp">Limpiar</a>
+                        <input class="btn btn-primary" name="btnCrearPaciente" type="submit" value="Crear Hospitalizacion"><br/><br/>
                     </form>
                 </div>
             </div>
